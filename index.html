@@ -331,11 +331,13 @@
     }
 
     /* ── Education ── */
-    #education {
+    #education { }
+
+    .edu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
+      gap: 1.5rem;
+      margin-top: 3rem;
     }
 
     .edu-card {
@@ -343,8 +345,9 @@
       border-radius: 20px;
       padding: 2rem;
       background: var(--warm);
-      margin-bottom: 1.5rem;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+    .edu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.07); }
     .edu-school { font-family: var(--ff-head); font-size: 1.3rem; margin-bottom: 0.3rem; }
     .edu-degree { font-size: 0.85rem; color: var(--mid); margin-bottom: 1rem; }
     .edu-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -357,22 +360,67 @@
       color: var(--clay);
     }
 
-    .achievements-col h3 { margin-bottom: 1.5rem; }
-    .achievement {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      margin-bottom: 1.2rem;
+    /* ── Resume Upload ── */
+    #resume {
+      background: var(--warm);
+      border-top: 1px solid var(--blush);
     }
-    .ach-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--rose);
-      margin-top: 0.45rem;
-      flex-shrink: 0;
+    #resume h2 { margin-bottom: 0.8rem; }
+    #resume > p { color: var(--mid); font-size: 0.95rem; margin-bottom: 2.5rem; max-width: 44ch; }
+
+    .resume-upload-zone {
+      max-width: 500px;
+      border: 2px dashed var(--blush);
+      border-radius: 22px;
+      padding: 3rem 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
     }
-    .achievement p { font-size: 0.87rem; color: var(--mid); }
-    .achievement p strong { color: var(--ink); }
+    .resume-upload-zone:hover, .resume-upload-zone.dragover {
+      border-color: var(--rose);
+      background: rgba(196,145,122,0.05);
+    }
+    .resume-upload-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .resume-upload-zone h3 { font-size: 1.2rem; color: var(--ink); margin-bottom: 0.4rem; font-weight: 500; }
+    .resume-upload-zone p { font-size: 0.8rem; color: var(--light); margin-bottom: 1.6rem; }
+    .resume-upload-zone input[type="file"] { display: none; }
+    .upload-btn {
+      display: inline-block;
+      background: var(--clay);
+      color: var(--cream);
+      padding: 0.7rem 1.8rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: none;
+      font-family: var(--ff-body);
+      transition: background 0.25s, transform 0.25s;
+    }
+    .upload-btn:hover { background: var(--rose); transform: translateY(-1px); }
+    .resume-status { margin-top: 1.2rem; font-size: 0.82rem; color: var(--clay); min-height: 1.4em; }
+    .resume-download-wrap { margin-top: 1.2rem; display: none; }
+    .resume-download-wrap.visible { display: block; }
+    .resume-download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cream);
+      border: 1px solid var(--blush);
+      border-radius: 100px;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.8rem;
+      color: var(--clay);
+      letter-spacing: 0.05em;
+      transition: border-color 0.2s;
+    }
+    .resume-download-link:hover { border-color: var(--clay); }
 
     /* ── Projects ── */
     #projects { background: var(--warm); }
@@ -504,7 +552,8 @@
       .hero-cta-row { justify-content: center; }
       .hero-img-wrap { order: -1; }
       .hero-badge { right: 0.5rem; }
-      #about, #education { grid-template-columns: 1fr; gap: 2.5rem; }
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-grid { grid-template-columns: 1fr; }
       .leadership-item { grid-template-columns: 1fr; gap: 0.5rem; }
       .nav-links { display: none; }
     }
@@ -521,6 +570,7 @@
     <li><a href="#education">Education</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -563,14 +613,6 @@
   <div class="stat fade-up">
     <span class="stat-num">3+</span>
     <p class="stat-label">University Programs</p>
-  </div>
-  <div class="stat fade-up">
-    <span class="stat-num">12</span>
-    <p class="stat-label">Years of Ballet</p>
-  </div>
-  <div class="stat fade-up">
-    <span class="stat-num">2nd</span>
-    <p class="stat-label">Hackathon Finish</p>
   </div>
 </div>
 
@@ -671,11 +713,10 @@
 
 <!-- ── Education ── -->
 <section id="education">
-  <div class="fade-up">
-    <p class="section-label">Academic Background</p>
-    <h2>Education</h2>
-    <br/>
-    <div class="edu-card">
+  <p class="section-label fade-up">Academic Background</p>
+  <h2 class="fade-up">Education</h2>
+  <div class="edu-grid">
+    <div class="edu-card fade-up">
       <p class="edu-school">NYU Leonard N. Stern School of Business</p>
       <p class="edu-degree">B.S. Business, Technology & Entrepreneurship · Expected 2029 · GPA 3.838</p>
       <div class="edu-pills">
@@ -686,7 +727,7 @@
       </div>
     </div>
 
-    <div class="edu-card">
+    <div class="edu-card fade-up">
       <p class="edu-school">Dhirubhai Ambani International School</p>
       <p class="edu-degree">IB Diploma Programme · 2020–2025 · Final Grade 42/45</p>
       <div class="edu-pills">
@@ -697,33 +738,23 @@
       </div>
     </div>
   </div>
+</section>
 
-  <div class="achievements-col fade-up">
-    <h3>Academic Achievements</h3>
+<!-- ── Resume Upload ── -->
+<section id="resume">
+  <p class="section-label fade-up">Documents</p>
+  <h2 class="fade-up">My Resume</h2>
+  <p class="fade-up">Upload your resume here so visitors can view and download it directly from your portfolio.</p>
 
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p><strong>AMC 12 & Cayley Competition</strong> — Top 25% distinction in international mathematics competitions.</p>
-    </div>
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p><strong>Avogadro Olympiad</strong> — Ranked 29th in India; Distinction awarded.</p>
-    </div>
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p><strong>Sir Isaac Newton Exam</strong> — Ranked 62nd in India; Distinction awarded.</p>
-    </div>
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p>Competed in global mathematics competitions including <strong>Waterloo, Galois, and AIME</strong>.</p>
-    </div>
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p>Completed <strong>Stanford University's Introduction to Mathematical Thinking</strong> (July 2023).</p>
-    </div>
-    <div class="achievement">
-      <div class="ach-dot"></div>
-      <p>IB Research Essay: <em>"What is the Scientific Potential of Lunar Astronomy?"</em> — Literature review on lunar-based telescopes, technical challenges, and engineering requirements.</p>
+  <div class="resume-upload-zone fade-up" id="uploadZone">
+    <span class="resume-upload-icon">📄</span>
+    <h3>Drop your resume here</h3>
+    <p>PDF or DOC · max 10MB</p>
+    <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" />
+    <label for="resumeInput" class="upload-btn">Choose File</label>
+    <div class="resume-status" id="resumeStatus"></div>
+    <div class="resume-download-wrap" id="resumeDownloadWrap">
+      <a class="resume-download-link" id="resumeDownloadLink" href="#" download>⬇ Download Resume</a>
     </div>
   </div>
 </section>
@@ -873,7 +904,7 @@
   <p class="footer-note">Sara Adukia · NYU Stern BTE '29 · New York, NY</p>
 </section>
 
-<!-- ── JS: Scroll fade ── -->
+<!-- ── JS: Scroll fade + Resume upload ── -->
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -884,6 +915,35 @@
   }, { threshold: 0.12 });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* Resume upload */
+  const zone   = document.getElementById('uploadZone');
+  const input  = document.getElementById('resumeInput');
+  const status = document.getElementById('resumeStatus');
+  const dlWrap = document.getElementById('resumeDownloadWrap');
+  const dlLink = document.getElementById('resumeDownloadLink');
+
+  ['dragover','dragenter'].forEach(evt =>
+    zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.add('dragover'); })
+  );
+  ['dragleave','drop'].forEach(evt =>
+    zone.addEventListener(evt, e => { e.preventDefault(); zone.classList.remove('dragover'); })
+  );
+  zone.addEventListener('drop', e => handleFile(e.dataTransfer.files[0]));
+  input.addEventListener('change', () => handleFile(input.files[0]));
+
+  function handleFile(file) {
+    if (!file) return;
+    if (file.size > 10 * 1024 * 1024) {
+      status.textContent = '⚠ File too large — please keep it under 10MB.';
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    dlLink.href = url;
+    dlLink.download = file.name;
+    status.textContent = '✓ ' + file.name + ' ready.';
+    dlWrap.classList.add('visible');
+  }
 </script>
 
 </body>
